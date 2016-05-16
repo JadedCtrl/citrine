@@ -281,7 +281,16 @@ char* ctr_internal_memmem(char* haystack, long hlen, char* needle, long nlen, in
  * Creates an object.
  */
 ctr_object* ctr_internal_create_object(int type) {
-	ctr_object* o = CTR_STAT_MALLOC(sizeof(ctr_object));
+	ctr_object* o;
+	/**
+	 * If there's a second hand object available at the junkyard,
+	 * prefer that. Saves a call to malloc.
+	 */
+	if (ctr_gc_junk_counter > 0) {
+		o = ctr_gc_junkyard[--ctr_gc_junk_counter];
+	} else {
+		o = CTR_STAT_MALLOC(sizeof(ctr_object));
+	}
 	o->properties = CTR_STAT_MALLOC(sizeof(ctr_map));
 	o->methods = CTR_STAT_MALLOC(sizeof(ctr_map));
 	o->properties->size = 0;
