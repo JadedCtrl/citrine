@@ -130,13 +130,10 @@ void ctr_gc_sweep() {
 }
 
 /**
- * Broom
- * 
- * GarbageCollector, to invoke use:
- * 
- * [Broom] sweep.
+ * @internal
+ * Garbage Collector sweep.
  */
-ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
+void  ctr_gc_internal_collect() {
 	ctr_object* context;
 	int oldcid;
 	ctr_gc_dust_counter = 0;
@@ -152,6 +149,17 @@ ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
 	}
 	ctr_gc_sweep();
 	ctr_context_id = oldcid;
+}
+
+/**
+ * Broom
+ *
+ * GarbageCollector, to invoke use:
+ *
+ * [Broom] sweep.
+ */
+ctr_object* ctr_gc_collect (ctr_object* myself, ctr_argument* argumentList) {
+	ctr_gc_internal_collect(); /* calls internal because automatic GC has to use this function as well and requires low overhead. */
 	return myself;
 }
 
