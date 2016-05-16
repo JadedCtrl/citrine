@@ -210,6 +210,21 @@ ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList) {
 }
 
 /**
+ * [Broom] mode: [Number]
+ *
+ * Selects mode of operation for GC.
+ *
+ * Available Modes:
+ * 0 - No Garbage Collection
+ * 1 - Activate Garbage Collector
+ * 3 - Activate Garbage Collctor and Recycle used objects
+ */
+ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList) {
+	ctr_gc_mode = (uint64_t) ctr_internal_cast2number( argumentList->object )->value.nvalue;
+	return myself;
+}
+
+/**
  * [Shell] call: [String]
  *
  * Performs a Shell operation. The Shell object uses a fluid API, so you can
