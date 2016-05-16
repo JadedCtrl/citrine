@@ -625,7 +625,7 @@ ctr_object* ctr_build_string_from_cstring( char* str );
  */
 #define CTR_STAT_CLEAN() if ((ctr_gc_mode & 1) && ctr_gc_alloc > (ctr_gc_memlimit * 0.8)) ctr_gc_internal_collect();
 #define CTR_STAT_CHECK() if (ctr_gc_memlimit < ctr_gc_alloc) { printf( "Out of memory.\n" ); exit(1); }
-#define CTR_STAT_MALLOC(X) malloc( X ); ctr_gc_alloc += X; CTR_STAT_CHECK(); //printf("m+ %d \n", X);
+#define CTR_STAT_MALLOC(X) malloc( X ); CTR_STAT_CLEAN(); ctr_gc_alloc += X; CTR_STAT_CHECK(); //printf("m+ %d \n", X);
 #define CTR_STAT_CALLOC(S,X) calloc( S, X ); ctr_gc_alloc += (S*X); CTR_STAT_CHECK(); //printf("c+ %d \n", (S*X));
 #define CTR_STAT_REALLOC(O,F,T) realloc( O, T ); ctr_gc_alloc += (T - F); CTR_STAT_CHECK(); //printf("+- %d \n", (T-F));
 #define CTR_STAT_FREE(P,X) free(P); ctr_gc_alloc -= X; //printf("- %d \n", X);
