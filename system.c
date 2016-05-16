@@ -110,7 +110,12 @@ void ctr_gc_sweep() {
 					if (currentObject->value.rvalue != NULL) CTR_STAT_FREE(currentObject->value.rvalue, sizeof(ctr_resource));
 				break;
 			}
-			CTR_STAT_FREE(currentObject, sizeof(ctr_object));
+			if ((ctr_gc_mode & 2) && ctr_gc_junk_counter < 100) {
+				ctr_gc_junkyard[ctr_gc_junk_counter] = currentObject;
+				ctr_gc_junk_counter ++;
+			} else {
+				CTR_STAT_FREE(currentObject, sizeof(ctr_object));
+			}
 			currentObject = nextObject;
 		} else {
 			ctr_gc_kept_counter ++;
