@@ -61,6 +61,7 @@ void ctr_gc_sweep() {
 		ctr_gc_object_counter ++;
 		if (currentObject->info.mark==0 && currentObject->info.sticky==0){
 			ctr_gc_dust_counter ++;
+			/* remove from linked list */
 			if (previousObject) {
 				if (currentObject->gnext) {
 					previousObject->gnext = currentObject->gnext;
