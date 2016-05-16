@@ -575,6 +575,9 @@ int ctr_gc_kept_counter;
 int ctr_gc_sticky_counter;
 int ctr_gc_recycled_counter;
 int ctr_gc_mode;
+int ctr_gc_junk_counter;
+ctr_object* ctr_gc_junkyard[100];
+
 
 uint64_t ctr_gc_alloc;
 uint64_t ctr_gc_memlimit;
