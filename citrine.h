@@ -563,7 +563,6 @@ ctr_object* ctr_gc_kept_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_kept_alloc(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_sticky_count(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_setmode(ctr_object* myself, ctr_argument* argumentList);
-ctr_object* ctr_gc_recycle(ctr_object* myself, ctr_argument* argumentList);
 ctr_object* ctr_gc_setmemlimit(ctr_object* myself, ctr_argument* argumentList);
 
 /**
