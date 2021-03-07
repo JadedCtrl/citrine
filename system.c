@@ -1176,9 +1176,9 @@ ctr_object* ctr_clock_equals( ctr_object* myself, ctr_argument* argumentList ) {
  * ✎ write: (m = n), stop.
  */
 ctr_object* ctr_clock_neq( ctr_object* myself, ctr_argument* argumentList ) {
-	ctr_object* bool = ctr_clock_equals(myself, argumentList);
-	bool->value.bvalue = !bool->value.bvalue;
-	return bool;
+	ctr_object* boolean = ctr_clock_equals(myself, argumentList);
+	boolean->value.bvalue = !boolean->value.bvalue;
+	return boolean;
 }
 
 
